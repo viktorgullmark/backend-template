@@ -10,18 +10,13 @@ using System.Web;
 namespace BaseBackend.Services
 {
     public class UserService : IUserPasswordStore<tblUser, int>, IUserEmailStore<tblUser, int>,
-        IUserLoginStore<tblUser, int>, IUserRoleStore<tblUser, int>
+        IUserRoleStore<tblUser, int>
     {
         public void Dispose()
         {
         }
 
         TblUserRepository _repo => new TblUserRepository();
-
-        public Task AddLoginAsync(tblUser user, UserLoginInfo login)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task AddToRoleAsync(tblUser user, string roleName)
         {
@@ -34,11 +29,6 @@ namespace BaseBackend.Services
         }
 
         public Task DeleteAsync(tblUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<tblUser> FindAsync(UserLoginInfo login)
         {
             throw new NotImplementedException();
         }
@@ -64,11 +54,6 @@ namespace BaseBackend.Services
         }
 
         public Task<bool> GetEmailConfirmedAsync(tblUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<UserLoginInfo>> GetLoginsAsync(tblUser user)
         {
             throw new NotImplementedException();
         }
@@ -99,11 +84,6 @@ namespace BaseBackend.Services
         }
 
         public Task RemoveFromRoleAsync(tblUser user, string roleName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RemoveLoginAsync(tblUser user, UserLoginInfo login)
         {
             throw new NotImplementedException();
         }
