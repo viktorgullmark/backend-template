@@ -12,8 +12,4 @@ Initial steps to get started:
 
 tblUser:
 
-  UserId(int)
-  UserName(nvarchar(50))
-  Password(nvarchar(500))
-  Created(datetime)
-  Modified(datetime)
+UserId(int), UserName(nvarchar(50)), Password(nvarchar(500)), Created(datetime), Modified(datetime)
