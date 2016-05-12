@@ -1,0 +1,5 @@
+packages/
+BaseBackend/obj/
+BaseBackend/bin/
+BaseApi/obj/
+BaseApi/bin/
