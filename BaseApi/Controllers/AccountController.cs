@@ -15,7 +15,6 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using BaseApi.Models;
 using BaseApi.Providers;
-using BaseApi.Results;
 using BaseBackend;
 
 namespace BaseApi.Controllers
