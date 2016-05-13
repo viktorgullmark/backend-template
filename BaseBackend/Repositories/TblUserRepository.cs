@@ -29,6 +29,17 @@ namespace BaseBackend.Repositories
             _dbContext.tblUser.Add(user);
             _dbContext.SaveChanges();
         }
+        public void Delete(tblUser user)
+        {
+            _dbContext.tblUser.Remove(user);
+            _dbContext.SaveChanges();
+        }
+
+        public void Update(tblUser user)
+        {
+            _dbContext.Entry(user).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+        }
 
         public async Task<tblUser> FindByNameAsync(string userName)
         {

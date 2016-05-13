@@ -28,9 +28,9 @@ namespace BaseBackend.Services
             await Task.Run(() => _repo.InsertAsync(user));
         }
 
-        public Task DeleteAsync(tblUser user)
+        public async Task DeleteAsync(tblUser user)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => _repo.Delete(user));
         }
 
         public async Task<tblUser> FindByEmailAsync(string email)
@@ -103,9 +103,9 @@ namespace BaseBackend.Services
             await Task.Run(() => user.Password = passwordHash);
         }
 
-        public Task UpdateAsync(tblUser user)
+        public async Task UpdateAsync(tblUser user)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => _repo.Update(user));
         }
     }
 
