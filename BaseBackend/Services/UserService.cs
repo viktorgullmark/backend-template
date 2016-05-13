@@ -25,7 +25,7 @@ namespace BaseBackend.Services
 
         public async Task CreateAsync(tblUser user)
         {
-            await Task.Run(() => _repo.InsertAsync(user));
+            await Task.Run(() => _repo.Insert(user));
         }
 
         public async Task DeleteAsync(tblUser user)

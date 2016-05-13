@@ -21,7 +21,7 @@ namespace BaseBackend.Repositories
             _dbContext = dbContext;
         }
 
-        public void InsertAsync(tblUser user)
+        public void Insert(tblUser user)
         {
             user.Created = DateTime.Now;
             user.Modified = DateTime.Now;
