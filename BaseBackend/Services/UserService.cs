@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using BaseBackend.Repositories;
 using System.Web;
+using BaseBackend.DbContexts;
 
 namespace BaseBackend.Services
 {
@@ -16,7 +17,9 @@ namespace BaseBackend.Services
         {
         }
 
-        TblUserRepository _repo => new TblUserRepository();
+        // TODO: Find better way to instantiate db-context
+        private readonly BaseDbContext _dbContext = BaseDbContext.Create();
+        TblUserRepository _repo => new TblUserRepository(_dbContext);
 
         public Task AddToRoleAsync(tblUser user, string roleName)
         {

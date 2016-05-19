@@ -10,7 +10,7 @@ namespace BaseBackend.Repositories
 {
     public class TblUserRepository
     {
-        private readonly BaseDbContext _dbContext = BaseDbContext.Create();
+        private readonly BaseDbContext _dbContext;
 
         public TblUserRepository()
         {   
