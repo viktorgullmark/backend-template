@@ -11,6 +11,7 @@ using Owin;
 using BaseApi.Providers;
 using BaseApi.Models;
 using BaseBackend.DbContexts;
+using Microsoft.Owin.Cors;
 
 namespace BaseApi
 {
@@ -23,6 +24,9 @@ namespace BaseApi
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            //Enable cors
+            app.UseCors(CorsOptions.AllowAll);
+
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(BaseDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
