@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using BaseApi.Filters;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
@@ -16,6 +17,12 @@ namespace BaseApi
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            // Model-validation filter
+            config.Filters.Add(new ValidateModelAttribute());
+
+            // Model null-check filter
+            config.Filters.Add(new NullCheckModelAttribute());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
