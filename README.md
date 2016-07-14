@@ -1,4 +1,4 @@
-# BackendTemplate
+# backend-template
 Boiler-template for Backend & WebApi w/ token-based authentication
 ------------------------------------------------------------------
 
