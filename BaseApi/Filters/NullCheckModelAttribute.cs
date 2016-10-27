@@ -7,6 +7,7 @@ using System.Web.Http.Filters;
 
 namespace BaseApi.Filters
 {
+    // Validate parameters posted to endponits using this filter to check if they are null
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public class NullCheckModelAttribute : ActionFilterAttribute
     {

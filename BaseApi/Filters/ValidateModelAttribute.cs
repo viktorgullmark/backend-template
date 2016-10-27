@@ -5,6 +5,7 @@ using System.Web.Http.Filters;
 
 namespace BaseApi.Filters
 {
+    // Validate models posted to the API before entering endpoint
     public class ValidateModelAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(HttpActionContext actionContext)
