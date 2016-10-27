@@ -19,7 +19,7 @@ namespace BaseBackend.Services
 
         // TODO: Find better way to instantiate db-context
         private readonly BaseDbContext _dbContext = BaseDbContext.Create();
-        TblUserRepository _repo => new TblUserRepository(_dbContext);
+        TblUserRepository Repo => new TblUserRepository(_dbContext);
 
         public Task AddToRoleAsync(tblUser user, string roleName)
         {
@@ -28,27 +28,27 @@ namespace BaseBackend.Services
 
         public async Task CreateAsync(tblUser user)
         {
-            await Task.Run(() => _repo.Insert(user));
+            await Task.Run(() => Repo.Insert(user));
         }
 
         public async Task DeleteAsync(tblUser user)
         {
-            await Task.Run(() => _repo.Delete(user));
+            await Task.Run(() => Repo.Delete(user));
         }
 
         public async Task<tblUser> FindByEmailAsync(string email)
         {
-            return await Task.Run(() => _repo.FindByEmailAsync(email));
+            return await Task.Run(() => Repo.FindByEmailAsync(email));
         }
 
         public async Task<tblUser> FindByIdAsync(int userId)
         {
-            return await Task.Run(() => _repo.FindByIdAsync(userId));
+            return await Task.Run(() => Repo.FindByIdAsync(userId));
         }
 
         public async Task<tblUser> FindByNameAsync(string userName)
         {
-            return await Task.Run(() => _repo.FindByNameAsync(userName));
+            return await Task.Run(() => Repo.FindByNameAsync(userName));
         }
 
         public async Task<string> GetEmailAsync(tblUser user)
@@ -108,7 +108,7 @@ namespace BaseBackend.Services
 
         public async Task UpdateAsync(tblUser user)
         {
-            await Task.Run(() => _repo.Update(user));
+            await Task.Run(() => Repo.Update(user));
         }
     }
 
