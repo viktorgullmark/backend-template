@@ -1,4 +1,5 @@
-﻿SET ANSI_NULLS ON
+﻿BEGIN TRANSACTION
+SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -57,3 +58,12 @@ REFERENCES [dbo].[tblUser] ([UserId])
 GO
 ALTER TABLE [dbo].[tblUserRole] CHECK CONSTRAINT [FK_tblUserRole_tblUser]
 GO
+COMMIT
+
+-- Insert roles
+BEGIN TRANSACTION
+INSERT INTO tblRole (Guid, Name, Created, Modified)
+values 
+(newId(), 'Member', getdate(), getdate()),
+(newId(), 'Admin', getdate(), getdate())
+COMMIT
