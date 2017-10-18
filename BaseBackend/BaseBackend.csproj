@@ -72,11 +72,23 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DbContexts\BaseDbContext.cs" />
+    <Compile Include="Enums\RoleEnum.cs" />
     <Compile Include="Interfaces\IBaseEntity.cs" />
-    <Compile Include="Models\tblUser.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="BusinessObjects\tblRole.cs" />
+    <Compile Include="BusinessObjects\tblUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\TblRoleRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\TblUserRepository.cs" />
+    <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblRole.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblUser.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -108,6 +120,7 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Database.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

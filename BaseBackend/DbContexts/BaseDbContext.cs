@@ -12,7 +12,5 @@ namespace BaseBackend.DbContexts
         {
             return new BaseDbContext();
         }
-
-        // TODO: Extend implementation
     }
 }

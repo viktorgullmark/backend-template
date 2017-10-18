@@ -17,38 +17,40 @@ namespace BaseBackend.Services
         {
         }
 
-        // TODO: Find better way to instantiate db-context
         private readonly BaseDbContext _dbContext = BaseDbContext.Create();
-        TblUserRepository Repo => new TblUserRepository(_dbContext);
 
-        public Task AddToRoleAsync(tblUser user, string roleName)
+        TblUserRepository UserRepo => new TblUserRepository(_dbContext);
+        TblRoleRepository RoleRepo => new TblRoleRepository(_dbContext);
+
+        public async Task AddToRoleAsync(tblUser user, string roleName)
         {
-            throw new NotImplementedException();
+            var role = await Task.Run(() => RoleRepo.FindAsync(x => x.Name == roleName));
+            await Task.Run(() => UserRepo.AddToRole(user, role));
         }
 
         public async Task CreateAsync(tblUser user)
         {
-            await Task.Run(() => Repo.Insert(user));
+            await Task.Run(() => UserRepo.Insert(user));
         }
 
         public async Task DeleteAsync(tblUser user)
         {
-            await Task.Run(() => Repo.Delete(user));
+            await Task.Run(() => UserRepo.Delete(user));
         }
 
         public async Task<tblUser> FindByEmailAsync(string email)
         {
-            return await Task.Run(() => Repo.FindByEmailAsync(email));
+            return await Task.Run(() => UserRepo.FindAsync(x => x.UserName == email));
         }
 
         public async Task<tblUser> FindByIdAsync(int userId)
         {
-            return await Task.Run(() => Repo.FindByIdAsync(userId));
+            return await Task.Run(() => UserRepo.FindAsync(x => x.UserId == userId));
         }
 
         public async Task<tblUser> FindByNameAsync(string userName)
         {
-            return await Task.Run(() => Repo.FindByNameAsync(userName));
+            return await Task.Run(() => UserRepo.FindAsync(x => x.UserName == userName));
         }
 
         public async Task<string> GetEmailAsync(tblUser user)
@@ -68,12 +70,7 @@ namespace BaseBackend.Services
 
         public Task<IList<string>> GetRolesAsync(tblUser user)
         {
-            // TODO: Extend this function if you want to use roles
-
-            IList<string> roles = new List<string>();
-            roles.Add("Role1");
-
-            return Task.FromResult(roles);
+            return Task.Run(() => UserRepo.GetRoles(user.UserId));
         }
 
         public Task<bool> HasPasswordAsync(tblUser user)
@@ -81,9 +78,10 @@ namespace BaseBackend.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsInRoleAsync(tblUser user, string roleName)
+        public async Task<bool> IsInRoleAsync(tblUser user, string roleName)
         {
-            throw new NotImplementedException();
+            IList<string> roles = await GetRolesAsync(user);
+            return roles.Contains(roleName);
         }
 
         public Task RemoveFromRoleAsync(tblUser user, string roleName)
@@ -108,7 +106,7 @@ namespace BaseBackend.Services
 
         public async Task UpdateAsync(tblUser user)
         {
-            await Task.Run(() => Repo.Update(user));
+            await Task.Run(() => UserRepo.Update(user));
         }
     }
 

@@ -5,53 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseBackend.DbContexts;
+using BaseBackend.Interfaces;
+using BaseBackend.Services;
 
 namespace BaseBackend.Repositories
 {
-    public class TblUserRepository
+    public class TblUserRepository : GenericRepository<BaseDbContext, tblUser>
     {
-        private readonly BaseDbContext _dbContext;
-
         public TblUserRepository()
         {   
         }
 
         public TblUserRepository(BaseDbContext dbContext)
         {
-            _dbContext = dbContext;
+            DbContext = dbContext;
         }
 
-        public void Insert(tblUser user)
+        public async Task<IList<string>> GetRoles(int userId)
         {
-            user.Created = DateTime.Now;
-            user.Modified = DateTime.Now;
-
-            _dbContext.tblUser.Add(user);
-            _dbContext.SaveChanges();
-        }
-        public void Delete(tblUser user)
-        {
-            _dbContext.tblUser.Remove(user);
-            _dbContext.SaveChanges();
+            return await DbContext.tblRole.Where(x => x.tblUser.Any(z => z.UserId == userId)).Select(y => y.Name).ToListAsync();
         }
 
-        public void Update(tblUser user)
+        public async Task<tblUser> AddToRole(tblUser user, tblRole role)
         {
-            _dbContext.Entry(user).State = EntityState.Modified;
-            _dbContext.SaveChanges();
-        }
-
-        public async Task<tblUser> FindByNameAsync(string userName)
-        {
-            return await _dbContext.tblUser.FirstOrDefaultAsync(x => x.UserName == userName);
-        }
-        public async Task<tblUser> FindByEmailAsync(string email)
-        {
-            return await _dbContext.tblUser.FirstOrDefaultAsync(x => x.UserName == email);
-        }
-        public async Task<tblUser> FindByIdAsync(int userId)
-        {
-            return await _dbContext.tblUser.FirstOrDefaultAsync(x => x.UserId == userId);
+            user.tblRole.Add(role);
+            return await Update(user);
         }
     }
 }
